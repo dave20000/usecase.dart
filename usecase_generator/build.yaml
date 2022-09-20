@@ -1,0 +1,23 @@
+targets:
+    $default:
+        builders:
+            usecase_generator|usecase_gen:
+                enabled: true
+                generate_for:
+                    exclude:
+                        - test
+                        - example
+                    include:
+                        - test/integration/*
+
+builders:
+    usecase_gen:
+        import: "package:usecase_generator/builder.dart"
+        builder_factories: ["useCaseGenerator"]
+        build_extensions: { ".dart": [".uc.dart"] }
+        auto_apply: dependents
+        build_to: source
+        runs_before: ["injectable_generator|injectable_builder"]
+# Check this link to learn more about source gen package
+# https://pub.dev/documentation/source_gen/latest/
+# https://simonbinder.eu/posts/build_directory_moves/#understanding-build-outputs

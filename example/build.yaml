@@ -1,0 +1,9 @@
+targets:
+    $default:
+        builders:
+            usecase_generator|usecase_gen:
+                options:
+                    build_extensions:
+                        {
+                            "^lib/domain/repositories/{{}}.dart": "lib/domain/usecases/{{}}.uc.dart",
+                        }
