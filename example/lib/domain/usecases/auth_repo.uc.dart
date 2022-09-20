@@ -6,6 +6,10 @@ part of '../repositories/auth_repo.dart';
 // UseCaseGenerator
 // **************************************************************************
 
+final loginUseCaseProvider = Provider(
+  (ref) => LoginUseCase(ref.read(authRepoProvider)),
+);
+
 class LoginUseCase {
   final AuthRepo _authRepo;
 
@@ -18,10 +22,6 @@ class LoginUseCase {
   }
 }
 
-final loginUseCaseProvider = Provider(
-  (ref) => LoginUseCase(ref.read(authRepoProvider)),
-);
-
 class LoginParams {
   final AccountType accountType;
 
@@ -29,6 +29,10 @@ class LoginParams {
     required this.accountType,
   });
 }
+
+final logoutUseCaseProvider = Provider(
+  (ref) => LogoutUseCase(ref.read(authRepoProvider)),
+);
 
 class LogoutUseCase {
   final AuthRepo _authRepo;
@@ -39,7 +43,3 @@ class LogoutUseCase {
     return _authRepo.logout();
   }
 }
-
-final logoutUseCaseProvider = Provider(
-  (ref) => LogoutUseCase(ref.read(authRepoProvider)),
-);

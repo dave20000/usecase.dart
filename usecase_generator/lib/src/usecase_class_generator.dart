@@ -7,10 +7,12 @@ class UseCaseClassGenerator {
 
   final List<MethodElement> methodList;
   final String repositoryClassName;
+  final bool isInjectableDI;
 
   UseCaseClassGenerator(
     this.methodList,
     this.repositoryClassName,
+    this.isInjectableDI,
   );
 
   String generate() {
@@ -25,13 +27,15 @@ class UseCaseClassGenerator {
     final methodClassName = '${toPascalCase(methodName)}UseCase';
     final repoParamsClassName = '${toPascalCase(methodName)}Params';
 
+    if (!isInjectableDI) {
+      _generateRiverpodDI(methodName, methodClassName);
+    }
     _generateUseCaseClass(
       methodElement,
       methodName,
       methodClassName,
       repoParamsClassName,
     );
-    _generateRiverpodDI(methodName, methodClassName);
 
     final methodParameters = methodElement.parameters;
     final hasMethodParameters = methodParameters.isNotEmpty;

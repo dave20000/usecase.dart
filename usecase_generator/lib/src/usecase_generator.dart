@@ -32,9 +32,13 @@ class UseCaseGenerator extends GeneratorForAnnotation<UseCase> {
     } else if ((element).methods.isEmpty) {
       return '';
     } else {
+      final isInjectableDI =
+          annotation.read('isInjectableDI').literalValue as bool;
       return UseCaseClassGenerator(
-              (element).methods, toPascalCase((element).name))
-          .generate();
+        (element).methods,
+        toPascalCase((element).name),
+        isInjectableDI,
+      ).generate();
     }
   }
 }
