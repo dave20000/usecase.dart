@@ -1,3 +1,7 @@
+## 0.0.2
+
+* made sdk support from 2.18.0
+
 ## 0.0.1
 
-* TODO: Describe initial release.
+* Initial release
