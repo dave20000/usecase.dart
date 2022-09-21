@@ -6,7 +6,7 @@ Requires usecase_annotation package to annotate class.
 
 ## Add the package
 
-Add the `usecase_annotation` package as a dependencies and the `usecase_generator` package as a dev_dependencies as well as the `build_runner` package in your `pubspec.yaml` file:
+Add the [`usecase_annotation`](https://pub.dev/packages/usecase_annotation) package as a dependencies and the `usecase_generator` package as a dev_dependencies as well as the `build_runner` package in your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
