@@ -15,8 +15,9 @@ dependencies:
     path: ^1.8.2
     analyzer: ^4.7.0
     flutter_riverpod: ^1.0.4
-    usecase_annotation:
-        path: ../usecase_annotation/
+    # usecase_annotation:
+    #     path: ../usecase_annotation/
+    usecase_annotation: ^0.0.1
 
 dev_dependencies:
     flutter_test:
