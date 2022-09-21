@@ -439,14 +439,14 @@ packages:
   usecase_annotation:
     dependency: "direct main"
     description:
-      path: "../usecase_annotation"
+      path: "../../usecase_annotation"
       relative: true
     source: path
     version: "1.0.0"
   usecase_generator:
     dependency: "direct dev"
     description:
-      path: "../usecase_generator"
+      path: ".."
       relative: true
     source: path
     version: "1.0.0"
