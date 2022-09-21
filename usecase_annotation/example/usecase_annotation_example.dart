@@ -1,3 +1,6 @@
+import 'package:usecase_annotation/usecase_annotation.dart';
+
+@useCase
 abstract class AuthRepo {
   void m1();
   Future<String> m2(int param1);

@@ -1,4 +1,4 @@
-/// Annotate your repo class with `@UseCase()`
+/// Annotate your repo class with `@UseCase()` or `@useCase`
 /// to generate usecase classes for each functions
 ///
 /// **NOTE**: The repository class must be `abstract`!
@@ -24,3 +24,5 @@ class UseCase {
     this.isInjectableDI = false,
   });
 }
+
+const useCase = UseCase();
