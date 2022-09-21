@@ -12,7 +12,7 @@ targets:
 
 builders:
     usecase_gen:
-        import: "package:usecase_generator/builder.dart"
+        import: "package:usecase_generator/usecase_generator.dart"
         builder_factories: ["useCaseGenerator"]
         build_extensions: { ".dart": [".uc.dart"] }
         auto_apply: dependents
