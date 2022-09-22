@@ -1,3 +1,7 @@
+## 0.0.4
+
+* removed unwanted dependencies
+
 ## 0.0.3
 
 * Now can use @useCase as annotation also
