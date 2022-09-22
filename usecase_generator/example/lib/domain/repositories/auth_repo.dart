@@ -12,4 +12,6 @@ final authRepoProvider = Provider<AuthRepo>((ref) => AuthRepoImpl());
 abstract class AuthRepo {
   void login(AccountType accountType);
   Future<bool> logout();
+  Future<bool> create({required int x, required int y, required int z});
+  Future<bool> create2(String abc, {required int x, required int y, int? z});
 }

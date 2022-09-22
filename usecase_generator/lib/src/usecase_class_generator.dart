@@ -1,7 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
 
-import 'utils.dart';
-
 class UseCaseClassGenerator {
   final StringBuffer _stringBuffer = StringBuffer();
 
@@ -13,7 +11,9 @@ class UseCaseClassGenerator {
     this.methodList,
     this.repositoryClassName,
     this.isInjectableDI,
-  );
+  ) {
+    _toPascalCase(repositoryClassName);
+  }
 
   String generate() {
     for (var method in methodList) {
@@ -24,8 +24,8 @@ class UseCaseClassGenerator {
 
   void _generateUsecaseClassFromMethod(MethodElement methodElement) {
     final methodName = methodElement.name;
-    final methodClassName = '${toPascalCase(methodName)}UseCase';
-    final repoParamsClassName = '${toPascalCase(methodName)}Params';
+    final methodClassName = '${_toPascalCase(methodName)}UseCase';
+    final repoParamsClassName = '${_toPascalCase(methodName)}Params';
 
     if (!isInjectableDI) {
       _generateRiverpodDI(methodName, methodClassName);
@@ -47,10 +47,10 @@ class UseCaseClassGenerator {
 
   void _generateRiverpodDI(String methodName, String methodClassName) {
     _stringBuffer.writeln(
-      'final ${toLowerCamelCase(methodName)}UseCaseProvider = Provider(',
+      'final ${_toLowerCamelCase(methodName)}UseCaseProvider = Provider(',
     );
     _stringBuffer.writeln(
-      '  (ref) => $methodClassName(ref.read(${toLowerCamelCase(repositoryClassName)}Provider)),',
+      '  (ref) => $methodClassName(ref.read(${_toLowerCamelCase(repositoryClassName)}Provider)),',
     );
     _stringBuffer.writeln(');');
   }
@@ -61,7 +61,7 @@ class UseCaseClassGenerator {
     String methodClassName,
     String repoParamsClassName,
   ) {
-    final repoClassNameParameter = "_${toLowerCamelCase(repositoryClassName)}";
+    final repoClassNameParameter = "_${_toLowerCamelCase(repositoryClassName)}";
 
     final methodParameters = methodElement.parameters;
     final hasMethodParameters = methodParameters.isNotEmpty;
@@ -86,7 +86,11 @@ class UseCaseClassGenerator {
     _stringBuffer.writeln('return $repoClassNameParameter.$methodName(');
     for (var parameter in methodParameters) {
       final parameterName = parameter.name;
-      _stringBuffer.writeln('params.$parameterName,');
+      _stringBuffer.writeln(
+        parameter.isRequiredNamed || parameter.isOptionalNamed
+            ? '$parameterName : params.$parameterName,'
+            : 'params.$parameterName,',
+      );
     }
     _stringBuffer.writeln(');');
     _stringBuffer.writeln('}');
@@ -95,21 +99,66 @@ class UseCaseClassGenerator {
 
   void _generateParamsClass(
     String repoParamsClassName,
-    List<ParameterElement> parameters,
+    List<ParameterElement> methodParameters,
   ) {
     _stringBuffer.writeln('class $repoParamsClassName {');
-    for (var parameter in parameters) {
+    bool isAnyParamNotFinal = false;
+    for (var parameter in methodParameters) {
       final parameterName = parameter.name;
-      final parameterReturnType =
-          parameter.type.getDisplayString(withNullability: false);
-      _stringBuffer.writeln('final $parameterReturnType $parameterName;\n');
+      final isOptional = parameter.isOptional;
+      final parameterReturnType = parameter.type.getDisplayString(
+        withNullability: isOptional,
+      );
+      isAnyParamNotFinal =
+          isAnyParamNotFinal == true ? isAnyParamNotFinal : isOptional;
+
+      _stringBuffer.writeln(
+        isOptional
+            ? '$parameterReturnType $parameterName;\n'
+            : 'final $parameterReturnType $parameterName;\n',
+      );
     }
-    _stringBuffer.writeln('const $repoParamsClassName ({');
-    for (var parameter in parameters) {
+    _stringBuffer.writeln(
+      isAnyParamNotFinal
+          ? '$repoParamsClassName ('
+          : 'const $repoParamsClassName (',
+    );
+    bool firstNamedParam = true;
+    for (int i = 0; i < methodParameters.length; i++) {
+      final parameter = methodParameters[i];
       final parameterName = parameter.name;
-      _stringBuffer.writeln('required this.$parameterName,');
+
+      if (!parameter.isNamed) {
+        _stringBuffer.writeln('this.$parameterName,');
+      } else {
+        firstNamedParam = firstNamedParam == true ? firstNamedParam : false;
+        if (firstNamedParam == true) {
+          _stringBuffer.write('{');
+        }
+        _stringBuffer.writeln(
+          !parameter.isRequiredNamed
+              ? 'this.$parameterName,'
+              : 'required this.$parameterName,',
+        );
+        firstNamedParam = false;
+      }
+      if (i == methodParameters.length - 1) {
+        _stringBuffer.writeln(!parameter.isNamed ? ');' : '});');
+      }
     }
-    _stringBuffer.writeln('});');
+
     _stringBuffer.writeln('}');
+  }
+
+  /// Convert [String] with first character lower case
+  String _toLowerCamelCase(String s) {
+    if (s.length < 2) return s.toLowerCase();
+    return s[0].toLowerCase() + s.substring(1);
+  }
+
+  /// Convert [String] with first character upper case
+  String _toPascalCase(String s) {
+    if (s.length < 2) return s.toUpperCase();
+    return s[0].toUpperCase() + s.substring(1);
   }
 }

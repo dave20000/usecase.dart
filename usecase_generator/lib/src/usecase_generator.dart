@@ -6,7 +6,6 @@ import 'package:source_gen/source_gen.dart';
 import 'package:usecase_annotation/usecase_annotation.dart';
 
 import 'usecase_class_generator.dart';
-import 'utils.dart';
 
 class UseCaseGenerator extends GeneratorForAnnotation<UseCase> {
   @override
@@ -36,7 +35,7 @@ class UseCaseGenerator extends GeneratorForAnnotation<UseCase> {
           annotation.read('isInjectableDI').literalValue as bool;
       return UseCaseClassGenerator(
         (element).methods,
-        toPascalCase((element).name),
+        (element).name,
         isInjectableDI,
       ).generate();
     }
