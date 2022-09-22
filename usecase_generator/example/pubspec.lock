@@ -360,7 +360,7 @@ packages:
     source: sdk
     version: "0.0.99"
   source_gen:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: source_gen
       url: "https://pub.dartlang.org"
@@ -442,7 +442,7 @@ packages:
       name: usecase_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.3"
+    version: "0.0.4"
   usecase_generator:
     dependency: "direct dev"
     description:

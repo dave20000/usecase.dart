@@ -12,9 +12,8 @@ dependencies:
     cupertino_icons: ^1.0.2
     # usecase_annotation:
     #     path: ../../usecase_annotation/
-    usecase_annotation: ^0.0.3
+    usecase_annotation: ^0.0.4
     flutter_riverpod: ^1.0.4
-    source_gen: ^1.2.3
 
 dev_dependencies:
     flutter_test:
