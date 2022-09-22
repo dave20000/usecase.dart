@@ -23,7 +23,7 @@ dev_dependencies:
 
 ## Quick tutorial
 
-Create a auth_repo.dart class file and Annotate your repo class with `@UseCase()` to generate usecase classes for each functions:
+Create a auth_repo.dart class file and Annotate your repo class with `@useCase` or `@UseCase()` to generate usecase classes for each functions:
 
 **NOTE**: The repository class must be `abstract`!
 
@@ -78,11 +78,7 @@ This package is build to follow Uncle bob clean architecture approach and create
 
 The package is build to support riverpod dependency injection. You need to add [`flutter_riverpod`](https://pub.dev/packages/flutter_riverpod) package to your `pubspec.yaml` file.
 
-By default this package comes with riverpod dependency injection tu turn off riverpod di you need to make `isInjectableDI` parameter of UseCase annotation to true.
-
----
-
----
+By default this package comes with riverpod dependency injection to turn off riverpod di you need to make `isInjectableDI` parameter of UseCase annotation to true.
 
 ## Injectable DI
 
