@@ -19,10 +19,7 @@
 /// - `M2UseCase`, which calls `authRepository.m2()`
 ///
 class UseCase {
-  final bool isInjectableDI;
-  const UseCase({
-    this.isInjectableDI = false,
-  });
+  const UseCase();
 }
 
 const useCase = UseCase();

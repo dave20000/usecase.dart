@@ -78,7 +78,16 @@ This package is build to follow Uncle bob clean architecture approach and create
 
 The package is build to support riverpod dependency injection. You need to add [`flutter_riverpod`](https://pub.dev/packages/flutter_riverpod) package to your `pubspec.yaml` file.
 
-By default this package comes with riverpod dependency injection tu turn off riverpod di you need to make `isInjectableDI` parameter of UseCase annotation to true.
+By default this package comes with riverpod dependency injection tu turn off riverpod di you need to make `isInjectableDI` builder options in build.yaml to true.
+
+```yaml
+targets:
+  $default:
+    builders:
+      usecase_generator|usecase_gen:
+        options:
+          isInjectableDI: false
+```
 
 ---
 
@@ -96,6 +105,9 @@ Then as all the usecases class ends with the `-UseCase` so you just need to crea
 targets:
   $default:
     builders:
+      usecase_generator|usecase_gen:
+        options:
+          isInjectableDI: true
       injectable_generator:injectable_builder:
         options:
           auto_register: true

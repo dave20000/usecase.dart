@@ -8,7 +8,7 @@ part '../usecases/auth_repo.uc.dart';
 
 final authRepoProvider = Provider<AuthRepo>((ref) => AuthRepoImpl());
 
-@UseCase()
+@useCase
 abstract class AuthRepo {
   void login(AccountType accountType);
   Future<bool> logout();

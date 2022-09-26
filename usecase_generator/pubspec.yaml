@@ -11,9 +11,9 @@ dependencies:
     source_gen: ^1.2.5
     path: ^1.8.2
     analyzer: ">=4.6.0 <6.0.0"
-    # usecase_annotation:
-    #     path: ../usecase_annotation/
-    usecase_annotation: ^0.0.4
+    usecase_annotation:
+        path: ../usecase_annotation/
+    # usecase_annotation: ^0.0.4
 
 dev_dependencies:
     test: ^1.21.6

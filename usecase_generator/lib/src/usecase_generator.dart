@@ -8,6 +8,10 @@ import 'package:usecase_annotation/usecase_annotation.dart';
 import 'usecase_class_generator.dart';
 
 class UseCaseGenerator extends GeneratorForAnnotation<UseCase> {
+  final Map<String, dynamic> options;
+
+  UseCaseGenerator(this.options);
+
   @override
   FutureOr<String> generateForAnnotatedElement(
     Element element,
@@ -31,12 +35,19 @@ class UseCaseGenerator extends GeneratorForAnnotation<UseCase> {
     } else if ((element).methods.isEmpty) {
       return '';
     } else {
-      final isInjectableDI =
-          annotation.read('isInjectableDI').literalValue as bool;
+      bool isInjectableDIGlobal = false;
+      if (options["isInjectableDI"] != null && options["isInjectableDI"]) {
+        isInjectableDIGlobal = true;
+      }
+
+      // final isInjectableDI =
+      //     annotation.read('isInjectableDI').literalValue as bool;
+
       return UseCaseClassGenerator(
         (element).methods,
         (element).name,
-        isInjectableDI,
+        // isInjectableDI ? true : isInjectableDIGlobal,
+        isInjectableDIGlobal,
       ).generate();
     }
   }

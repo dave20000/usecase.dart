@@ -439,9 +439,9 @@ packages:
   usecase_annotation:
     dependency: "direct main"
     description:
-      name: usecase_annotation
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "../../usecase_annotation"
+      relative: true
+    source: path
     version: "0.0.4"
   usecase_generator:
     dependency: "direct dev"
@@ -449,7 +449,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.4"
+    version: "0.0.5"
   vector_math:
     dependency: transitive
     description:

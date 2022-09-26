@@ -5,7 +5,7 @@ import 'src/usecase_generator.dart';
 
 /// Builds generators for `build_runner` to run
 Builder useCaseGenerator(BuilderOptions options) => PartBuilder(
-      [UseCaseGenerator()],
+      [UseCaseGenerator(options.config)],
       '.uc.dart',
       header: '''
 // GENERATED CODE - DO NOT MODIFY BY HAND

@@ -1,3 +1,7 @@
+## 0.0.5
+
+* removed isInjectable from usecase annotation
+
 ## 0.0.4
 
 * removed unwanted dependencies
