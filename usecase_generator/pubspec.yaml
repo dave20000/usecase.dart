@@ -1,6 +1,6 @@
 name: usecase_generator
 description: usecase_generator is generator package for usecase_annotation for generating usecases class from the repository class
-version: 0.0.5
+version: 0.0.6
 homepage: https://github.com/dave20000/usecase.dart/tree/master/usecase_generator
 
 environment:
@@ -11,9 +11,9 @@ dependencies:
     source_gen: ^1.2.5
     path: ^1.8.2
     analyzer: ">=4.6.0 <6.0.0"
-    usecase_annotation:
-        path: ../usecase_annotation/
-    # usecase_annotation: ^0.0.4
+    # usecase_annotation:
+    #     path: ../usecase_annotation/
+    usecase_annotation: ^0.0.5
 
 dev_dependencies:
     test: ^1.21.6

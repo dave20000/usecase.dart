@@ -1,3 +1,7 @@
+## 0.0.6
+
+* removed isInjectableDI annotation and made it as builder options
+
 ## 0.0.5
 
 * removed unwanted dependency

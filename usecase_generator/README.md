@@ -10,7 +10,7 @@ Add the [`usecase_annotation`](https://pub.dev/packages/usecase_annotation) pack
 
 ```yaml
 dependencies:
-  flutter:
+  flutter
     sdk: flutter
   usecase_annotation: latest
 
@@ -78,13 +78,22 @@ This package is build to follow Uncle bob clean architecture approach and create
 
 The package is build to support riverpod dependency injection. You need to add [`flutter_riverpod`](https://pub.dev/packages/flutter_riverpod) package to your `pubspec.yaml` file.
 
-By default this package comes with riverpod dependency injection to turn off riverpod di you need to make `isInjectableDI` parameter of UseCase annotation to true.
+By default this package comes with riverpod dependency injection to turn off riverpod di you need to make `isInjectableDI` in build.yaml to true.
+
+```yaml
+targets:
+  $default:
+    builders:
+      usecase_generator|usecase_gen:
+        options:
+          isInjectableDI: false
+```
 
 ## Injectable DI
 
 This package can also work with the [`injectable`](https://pub.dev/packages/injectable) package.
 
-Firstly you need to make `isInjectableDI` as true.
+Firstly you need to make `isInjectableDI` as true in build.yaml.
 
 Then as all the usecases class ends with the `-UseCase` so you just need to create a `build.yaml` file next to `pubspec.yaml` file and In this file you need to add the below content:
 
@@ -96,6 +105,9 @@ targets:
         options:
           auto_register: true
           class_name_pattern: "UseCase$"
+      usecase_generator|usecase_gen:
+        options:
+          isInjectableDI: true
 ```
 
 ---
